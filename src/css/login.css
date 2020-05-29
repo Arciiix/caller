@@ -1,0 +1,82 @@
+body {
+  background-color: #14bdac;
+}
+
+.container {
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.form {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.iconDiv {
+  border-radius: 50%;
+  background-color: #14bdac;
+  text-align: center;
+}
+.submit {
+  width: 90% !important;
+}
+.icon {
+  color: white;
+}
+.input {
+  width: 90%;
+}
+
+@media only screen and (max-width: 768px) {
+  .form {
+    width: 100vw;
+    height: 50vh;
+  }
+  .iconDiv {
+    width: 30vw;
+    height: 30vw;
+  }
+  .icon {
+    font-size: 20vw;
+    line-height: 30vw;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .form {
+    width: 80vw;
+    height: 40vh;
+  }
+  .iconDiv {
+    width: 20vh;
+    height: 20vh;
+  }
+  .icon {
+    font-size: 15vh;
+    line-height: 20vh;
+  }
+}
+
+@media only screen and (max-height: 400px) {
+  .form {
+    width: 95vw;
+    height: 95vh;
+  }
+  .iconDiv {
+    display: none;
+  }
+  .input {
+    height: 57vh;
+    font-size: 35vh;
+  }
+  .submit {
+    height: 29vh !important;
+  }
+}

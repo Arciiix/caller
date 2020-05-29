@@ -1,0 +1,65 @@
+body {
+  background-color: #14bdac;
+}
+
+.container {
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.alert {
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .alert {
+    width: 80vw;
+  }
+  .alertTitle {
+    font-size: 10vw;
+  }
+  .alertBody {
+    font-size: 5vw;
+  }
+  .spinner {
+    height: 15vw;
+    width: 15vw;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .alert {
+    width: 60vw;
+  }
+  .alertTitle {
+    font-size: 5vw;
+  }
+  .alertBody {
+    font-size: 4vw;
+  }
+  .spinner {
+    height: 5vw;
+    width: 5vw;
+  }
+}
+
+@media only screen and (max-height: 400px) {
+  .alert {
+    width: 60vw;
+  }
+  .alertTitle {
+    font-size: 3vw;
+  }
+  .alertBody {
+    font-size: 2vw;
+  }
+  .spinner {
+    display: none;
+  }
+}

@@ -1,0 +1,85 @@
+body {
+  background-color: #14bdac;
+}
+
+.container {
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.activeStatus {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.activeDot {
+  border-radius: 50%;
+  text-align: center;
+}
+.active {
+  background-color: #62db52;
+}
+.inactive {
+  background-color: #eb2c1e;
+}
+.textActive {
+  color: #62db52;
+}
+.textInactive {
+  color: #eb2c1e;
+}
+
+@media only screen and (max-width: 768px) {
+  .activeStatus {
+    margin: 2vh;
+  }
+  .activeDot {
+    width: 3vw;
+    height: 3vw;
+  }
+  .activeText {
+    line-height: 6.5vw;
+    font-size: 8vw;
+    margin-left: 2vw;
+  }
+  .textField {
+    font-size: 10vw;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .activeDot {
+    width: 2vw;
+    height: 2vw;
+  }
+  .activeText {
+    line-height: 5vw;
+    font-size: 5vw;
+    margin-left: 2vw;
+  }
+  .textField {
+    margin: 2vh;
+    font-size: 5vw;
+  }
+}
+@media only screen and (max-height: 400px) {
+  .activeStatus {
+    display: none;
+  }
+
+  .activeText {
+    line-height: 5vw;
+    font-size: 5vw;
+    margin-left: 2vw;
+  }
+  .textField {
+    margin: 2vh;
+    font-size: 3vw;
+  }
+}
