@@ -22,11 +22,6 @@ body {
   border-radius: 50%;
   text-align: center;
 }
-
-.activeDot {
-  border-radius: 50%;
-  text-align: center;
-}
 .active {
   background-color: #62db52;
 }
