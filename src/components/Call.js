@@ -40,7 +40,12 @@ class Call extends React.Component {
             </b>
           </span>
         </div>
-        <Form.Control className="textField" as="textarea" rows="5" />
+        <Form.Control
+          className="textField"
+          as="textarea"
+          rows="5"
+          placeholder="Wpisz wiadomość (opcjonalnie)"
+        />
         <Button
           variant="primary"
           size="lg"

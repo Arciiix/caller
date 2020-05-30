@@ -10,6 +10,10 @@ class Calling extends React.Component {
       status: "Łączenie...",
     };
   }
+
+  componentDidMount() {
+    this.props.onMessage.bind(this.props.this)(); //DEV
+  }
   render() {
     return (
       <div className="container">
