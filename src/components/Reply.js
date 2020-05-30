@@ -9,10 +9,15 @@ class Reply extends React.Component {
     this.state = {
       isActive: false,
       message: "",
+      inputText: "",
     };
   }
   componentDidMount() {
     this.setState({ isActive: true, message: "test" }, this.forceUpdate); //dev
+  }
+  send() {
+    //dev
+    this.setState({ inputText: "" }, this.forceUpdate);
   }
   render() {
     return (
@@ -40,11 +45,22 @@ class Reply extends React.Component {
         </Alert>
 
         <div className="messageForm">
-          <Form.Control className="messageInput" />
+          <Form.Control
+            className="messageInput"
+            value={this.state.inputText}
+            onKeyDown={(e) => {
+              if (e.key.toLowerCase() === "enter") {
+                this.send.bind(this)();
+              }
+            }}
+            onChange={(e) => {
+              this.setState({ inputText: e.target.value });
+            }}
+          />
           <Button
             variant="success"
             className="sendBtn"
-            onClick={() => alert(window.innerHeight)}
+            onClick={this.send.bind(this)}
           >
             Wyślij
           </Button>

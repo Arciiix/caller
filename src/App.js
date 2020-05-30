@@ -36,14 +36,15 @@ class App extends React.Component {
   }
 
   logIn() {
-    this.setState({ isLogged: true }, this.forceUpdate); //DEV
+    this.setState({ isLogged: true }, this.forceUpdate); //dev
     this.forceUpdate();
   }
-  call() {
-    this.setState({ calling: true }, this.forceUpdate); //DEV
+  call(message) {
+    //dev - the message is here at variable "message"
+    this.setState({ calling: true }, this.forceUpdate); //dev
   }
   message() {
-    this.setState({ writingMessage: true }, this.forceUpdate); //DEV
+    this.setState({ writingMessage: true }, this.forceUpdate); //dev
   }
 }
 

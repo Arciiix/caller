@@ -9,6 +9,7 @@ class Call extends React.Component {
     super(props);
     this.state = {
       activeStatus: { isActive: false, type: "" },
+      inputText: "",
     };
   }
   componentDidMount() {
@@ -16,6 +17,11 @@ class Call extends React.Component {
       { activeStatus: { isActive: true, type: "komputer" } },
       this.forceUpdate
     ); //dev
+  }
+
+  send() {
+    //dev
+    this.props.call.bind(this.props.this, this.state.inputText)();
   }
   render() {
     return (
@@ -45,12 +51,21 @@ class Call extends React.Component {
           as="textarea"
           rows="5"
           placeholder="Wpisz wiadomość (opcjonalnie)"
+          value={this.state.inputText}
+          onKeyDown={(e) => {
+            if (e.key.toLowerCase() === "enter") {
+              this.send.bind(this)();
+            }
+          }}
+          onChange={(e) => {
+            this.setState({ inputText: e.target.value });
+          }}
         />
         <Button
           variant="primary"
           size="lg"
           block
-          onClick={this.props.call.bind(this.props.this)} //Call
+          onClick={this.send.bind(this)} //Call
         >
           Zawołaj
         </Button>
