@@ -15,6 +15,7 @@ class App extends React.Component {
       isLogged: false,
       writingMessage: false,
       calling: false,
+      message: "",
     };
   }
   render() {
@@ -25,7 +26,13 @@ class App extends React.Component {
       //If user is logged and isn't writing or receiving message right now
       if (!this.state.writingMessage) {
         if (this.state.calling) {
-          return <Calling this={this} onMessage={this.message} />;
+          return (
+            <Calling
+              this={this}
+              onMessage={this.message}
+              message={this.state.message}
+            />
+          );
         } else {
           return <Call this={this} call={this.call} />;
         }
@@ -41,7 +48,7 @@ class App extends React.Component {
   }
   call(message) {
     //dev - the message is here at variable "message"
-    this.setState({ calling: true }, this.forceUpdate); //dev
+    this.setState({ calling: true, message: message }, this.forceUpdate); //dev
   }
   message() {
     this.setState({ writingMessage: true }, this.forceUpdate); //dev
