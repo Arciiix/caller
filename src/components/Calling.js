@@ -35,6 +35,9 @@ class Calling extends React.Component {
         case "read":
           this.setState({ status: "Przeczytano!" });
           break;
+        case "end":
+          this.setState({ status: "Zakończono!" });
+          break;
         default:
           break;
       }
