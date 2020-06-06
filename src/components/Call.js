@@ -17,8 +17,7 @@ class Call extends React.Component {
     };
   }
   componentDidMount() {
-    //DEV
-    this.socket = io("http://localhost:3232", {
+    this.socket = io("", {
       query: `type=readonly&room=${room}`,
     });
 

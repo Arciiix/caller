@@ -15,8 +15,7 @@ class Calling extends React.Component {
   }
 
   componentDidMount() {
-    //DEV
-    this.socket = io("http://localhost:3232", {
+    this.socket = io("", {
       query: `type=sender&room=${room}`,
     });
     this.socket.emit("call", { room: room, message: this.props.message });
