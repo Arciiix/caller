@@ -38,11 +38,13 @@ class Calling extends React.Component {
         case "end":
           this.setState({ status: "Zakończono!" });
           break;
+        case "writingMessage":
+          this.props.onMessage.bind(this.props.this)();
+          break;
         default:
           break;
       }
     });
-    //this.props.onMessage.bind(this.props.this)(); //DEV
   }
   render() {
     return (

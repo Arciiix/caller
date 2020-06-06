@@ -2,21 +2,50 @@ import React from "react";
 import "../css/bootstrap.min.css";
 import "../css/reply.css";
 import { Alert, Form, Button } from "react-bootstrap";
+import io from "socket.io-client";
+
+const room = "default";
 
 class Reply extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isActive: false,
-      message: "",
+      isActive: true,
+      message: "Pisanie wiadomości...",
       inputText: "",
     };
   }
   componentDidMount() {
-    this.setState({ isActive: true, message: "test" }, this.forceUpdate); //dev
+    //DEV
+    this.socket = io("http://localhost:3232", {
+      query: `type=sender&room=${room}`,
+    });
+
+    this.socket.on("message", (content) => {
+      this.setState({ message: content });
+    });
+    //When receiver ends the call (leaves the page or clicks on end button at the main page)
+    this.socket.on("statusUpdate", (newStatus) => {
+      if (newStatus === "end") {
+        this.setState({ isActive: false });
+      }
+    });
+
+    //When user leaves the page, send the notification about ended call
+    window.addEventListener("beforeunload", () => {
+      this.socket.emit("statusUpdate", {
+        toSender: false,
+        status: "end",
+        room: room,
+      });
+    });
   }
   send() {
-    //dev
+    this.socket.emit("message", {
+      toSender: false,
+      message: this.state.inputText,
+      room: room,
+    });
     this.setState({ inputText: "" }, this.forceUpdate);
   }
   render() {

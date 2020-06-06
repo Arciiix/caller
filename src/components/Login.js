@@ -17,6 +17,11 @@ class Login extends React.Component {
             placeholder="Hasło"
             aria-label="Hasło"
             type="password"
+            onKeyDown={(e) => {
+              if (e.key.toLowerCase() === "enter") {
+                this.props.onLogin.bind(this.props.this)();
+              }
+            }}
           />
           <Button
             variant="primary"

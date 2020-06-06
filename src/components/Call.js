@@ -4,6 +4,10 @@ import "../css/call.css";
 
 import { Button, Form } from "react-bootstrap";
 
+import io from "socket.io-client";
+
+const room = "default";
+
 class Call extends React.Component {
   constructor(props) {
     super(props);
@@ -13,14 +17,21 @@ class Call extends React.Component {
     };
   }
   componentDidMount() {
-    this.setState(
-      { activeStatus: { isActive: true, type: "komputer" } },
-      this.forceUpdate
-    ); //dev
+    //DEV
+    this.socket = io("http://localhost:3232", {
+      query: `type=readonly&room=${room}`,
+    });
+
+    //Ask server for active status and wait for response, then change the state
+    this.socket.emit("isActive", room);
+    this.socket.on("isActive", (isActive) => {
+      if (isActive.isActive) {
+        this.setState({ activeStatus: isActive }, this.forceUpdate);
+      }
+    });
   }
 
   send() {
-    //dev
     this.props.call.bind(this.props.this, this.state.inputText)();
   }
   render() {
@@ -42,7 +53,7 @@ class Call extends React.Component {
             <b>
               {this.state.activeStatus.isActive
                 ? this.state.activeStatus.type
-                : "nieaktywny"}
+                : "Nieaktywny"}
             </b>
           </span>
         </div>
