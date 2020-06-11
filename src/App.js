@@ -13,6 +13,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       isLogged: false,
+      token: "",
       writingMessage: false,
       calling: false,
       message: "",
@@ -21,7 +22,7 @@ class App extends React.Component {
   render() {
     if (!this.state.isLogged) {
       //When user isn't logged, show him the login page
-      return <Login onLogin={this.logIn} this={this} />;
+      return <Login onLogin={this.saveToken} this={this} />;
     } else {
       //If user is logged and isn't writing or receiving message right now
       if (!this.state.writingMessage) {
@@ -31,27 +32,49 @@ class App extends React.Component {
               this={this}
               onMessage={this.message}
               message={this.state.message}
+              token={this.state.token}
+              onInvaildToken={this.logOut}
             />
           );
         } else {
-          return <Call this={this} call={this.call} />;
+          return (
+            <Call
+              this={this}
+              call={this.call}
+              token={this.state.token}
+              onInvaildToken={this.logOut}
+            />
+          );
         }
       } else {
-        return <Reply this={this} />;
+        return (
+          <Reply
+            this={this}
+            token={this.state.token}
+            onInvaildToken={this.logOut}
+          />
+        );
       }
     }
   }
 
-  logIn() {
-    this.setState({ isLogged: true }, this.forceUpdate); //dev
-    this.forceUpdate();
+  saveToken(token) {
+    this.setState({ token: token, isLogged: true }, this.forceUpdate);
   }
   call(message) {
-    //dev - the message is here at variable "message"
-    this.setState({ calling: true, message: message }, this.forceUpdate); //dev
+    this.setState({ calling: true, message: message }, this.forceUpdate);
   }
   message() {
-    this.setState({ writingMessage: true }, this.forceUpdate); //dev
+    this.setState({ writingMessage: true }, this.forceUpdate);
+  }
+
+  logOut() {
+    this.setState({
+      isLogged: false,
+      token: "",
+      calling: false,
+      writingMessage: false,
+    });
   }
 }
 

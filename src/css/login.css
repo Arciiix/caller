@@ -34,6 +34,29 @@ body {
   width: 90%;
 }
 
+.invaild::placeholder {
+  color: red !important;
+  font-weight: 600 !important;
+  opacity: 1 !important; /* Firefox */
+}
+
+.invalid::-webkit-input-placeholder {
+  color: red !important;
+  font-weight: 600 !important;
+}
+
+.invalid:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: red !important;
+  font-weight: 600 !important;
+}
+
+.invaild::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: red !important;
+  font-weight: 600 !important;
+}
+
 @media only screen and (max-width: 768px) {
   .form {
     width: 100vw;

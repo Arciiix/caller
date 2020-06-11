@@ -16,8 +16,27 @@ class Call extends React.Component {
       inputText: "",
     };
   }
+
+  checkForAuthentication() {
+    return new Promise((resolve, reject) => {
+      //DEV
+      fetch(`http://localhost:3232/verify?token=${this.props.token}`).then(
+        (response) => {
+          if (response.status !== 200) {
+            console.error("Invaild token!");
+            this.props.onInvaildToken.bind(this.props.this)();
+          } else {
+            resolve();
+          }
+        }
+      );
+    });
+  }
+
   componentDidMount() {
-    this.socket = io("", {
+    //DEV
+    //this.socket = io("", {
+    this.socket = io("http://localhost:3232", {
       query: `type=readonly&room=${room}`,
     });
 
@@ -28,9 +47,13 @@ class Call extends React.Component {
         this.setState({ activeStatus: isActive }, this.forceUpdate);
       }
     });
+
+    //Check for users' login states - if they arent't logged, redirect them into login page
+    this.checkForAuthentication();
   }
 
-  send() {
+  async send() {
+    await this.checkForAuthentication();
     this.props.call.bind(this.props.this, this.state.inputText)();
   }
   render() {
@@ -75,7 +98,9 @@ class Call extends React.Component {
           variant="primary"
           size="lg"
           block
-          onClick={this.send.bind(this)} //Call
+          onClick={async () => {
+            await this.send.bind(this)();
+          }} //Call
         >
           Zawołaj
         </Button>

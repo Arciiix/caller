@@ -5,6 +5,31 @@ import "../css/login.css";
 import { Button, FormControl } from "react-bootstrap";
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { inputText: "", invalid: false };
+  }
+  login() {
+    if (this.state.inputText === "") {
+      this.setState({ invalid: true, inputText: "" });
+      return;
+    }
+    //DEV
+    fetch(
+      `http://localhost:3232/login?password=${escape(this.state.inputText)}`
+    )
+      .then((res) => {
+        if (res.status !== 200) {
+          this.setState({ invalid: true, inputText: "" });
+          return false;
+        }
+        return res.text();
+      })
+      .then((data) => {
+        if (!data) return;
+        this.props.onLogin.bind(this.props.this, data)();
+      });
+  }
   render() {
     return (
       <div className="container">
@@ -13,13 +38,17 @@ class Login extends React.Component {
             <i className="far fa-user icon"></i>
           </div>
           <FormControl
-            className="input"
+            className={`input ${this.state.invalid ? "invalid" : ""}`}
             placeholder="Hasło"
             aria-label="Hasło"
             type="password"
+            value={this.state.inputText}
+            onChange={(e) => {
+              this.setState({ inputText: e.target.value });
+            }}
             onKeyDown={(e) => {
               if (e.key.toLowerCase() === "enter") {
-                this.props.onLogin.bind(this.props.this)();
+                this.login.bind(this)();
               }
             }}
           />
@@ -28,7 +57,7 @@ class Login extends React.Component {
             size="lg"
             className="submit"
             block
-            onClick={this.props.onLogin.bind(this.props.this)} //I call the callback to change the parent's state. This.props.this is parent, so I need to assign it to change state.
+            onClick={this.login.bind(this)}
           >
             Zaloguj
           </Button>

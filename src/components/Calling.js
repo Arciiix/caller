@@ -4,6 +4,9 @@ import "../css/calling.css";
 import { Alert, Spinner } from "react-bootstrap";
 import io from "socket.io-client";
 
+//For reading the nickname
+import jwtDecode from "jwt-decode";
+
 const room = "default";
 
 class Calling extends React.Component {
@@ -14,11 +17,34 @@ class Calling extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.socket = io("", {
+  checkForAuthentication() {
+    return new Promise((resolve, reject) => {
+      //DEV
+      fetch(`http://localhost:3232/verify?token=${this.props.token}`).then(
+        (response) => {
+          if (response.status !== 200) {
+            console.error("Invaild token!");
+            this.props.onInvaildToken.bind(this.props.this)();
+          } else {
+            resolve();
+          }
+        }
+      );
+    });
+  }
+
+  async componentDidMount() {
+    await this.checkForAuthentication();
+    //DEV
+    //this.socket = io("", {
+    this.socket = io("http://localhost:3232", {
       query: `type=sender&room=${room}`,
     });
-    this.socket.emit("call", { room: room, message: this.props.message });
+    this.socket.emit("call", {
+      room: room,
+      message: this.props.message,
+      name: jwtDecode(this.props.token).name,
+    });
 
     this.socket.on("statusUpdate", (newStatus) => {
       switch (newStatus) {
