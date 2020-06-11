@@ -19,8 +19,7 @@ class Call extends React.Component {
 
   checkForAuthentication() {
     return new Promise((resolve, reject) => {
-      //DEV
-      fetch(`http://localhost:3232/verify?token=${this.props.token}`).then(
+      fetch(`http://10.249.20.105:8500/verify?token=${this.props.token}`).then(
         (response) => {
           if (response.status !== 200) {
             console.error("Invaild token!");
@@ -34,9 +33,7 @@ class Call extends React.Component {
   }
 
   componentDidMount() {
-    //DEV
-    //this.socket = io("", {
-    this.socket = io("http://localhost:3232", {
+    this.socket = io("", {
       query: `type=readonly&room=${room}`,
     });
 

@@ -14,9 +14,8 @@ class Login extends React.Component {
       this.setState({ invalid: true, inputText: "" });
       return;
     }
-    //DEV
     fetch(
-      `http://localhost:3232/login?password=${escape(this.state.inputText)}`
+      `http://10.249.20.105:8500/login?password=${escape(this.state.inputText)}`
     )
       .then((res) => {
         if (res.status !== 200) {
