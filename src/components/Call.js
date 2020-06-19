@@ -5,7 +5,6 @@ import "../css/call.css";
 import { Button, Form } from "react-bootstrap";
 
 import io from "socket.io-client";
-
 const room = "default";
 
 class Call extends React.Component {
