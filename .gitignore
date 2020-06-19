@@ -25,3 +25,6 @@ yarn-error.log*
 #font-awesome
 /public/webfonts
 package-lock.json
+
+# ignore server files
+/server
