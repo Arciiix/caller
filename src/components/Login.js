@@ -4,6 +4,9 @@ import "../css/login.css";
 
 import { Button, FormControl } from "react-bootstrap";
 
+//Import the initial settings from init.js
+import settings from "../init.js";
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +18,7 @@ class Login extends React.Component {
       return;
     }
     fetch(
-      `http://10.249.20.105:8500/login?password=${escape(this.state.inputText)}`
+      `http://${settings.ip}/login?password=${escape(this.state.inputText)}`
     )
       .then((res) => {
         if (res.status !== 200) {

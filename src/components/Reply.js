@@ -4,7 +4,9 @@ import "../css/reply.css";
 import { Alert, Form, Button } from "react-bootstrap";
 import io from "socket.io-client";
 
-const room = "default";
+//Import the initial settings from init.js
+import settings from "../init.js";
+const room = settings.room;
 
 class Reply extends React.Component {
   constructor(props) {
@@ -18,7 +20,7 @@ class Reply extends React.Component {
 
   checkForAuthentication() {
     return new Promise((resolve, reject) => {
-      fetch(`http://10.249.20.105:8500/verify?token=${this.props.token}`).then(
+      fetch(`http://${settings.ip}/verify?token=${this.props.token}`).then(
         (response) => {
           if (response.status !== 200) {
             console.error("Invaild token!");

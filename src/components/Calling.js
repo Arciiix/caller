@@ -7,7 +7,9 @@ import io from "socket.io-client";
 //For reading the nickname
 import jwtDecode from "jwt-decode";
 
-const room = "default";
+//Import the initial settings from init.js
+import settings from "../init.js";
+const room = settings.room;
 
 class Calling extends React.Component {
   constructor(props) {
@@ -19,7 +21,7 @@ class Calling extends React.Component {
 
   checkForAuthentication() {
     return new Promise((resolve, reject) => {
-      fetch(`http://10.249.20.105:8500/verify?token=${this.props.token}`).then(
+      fetch(`http://${settings.ip}/verify?token=${this.props.token}`).then(
         (response) => {
           if (response.status !== 200) {
             console.error("Invaild token!");
