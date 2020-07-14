@@ -3,6 +3,7 @@ import "../css/bootstrap.min.css";
 import "../css/reply.css";
 import { Alert, Form, Button } from "react-bootstrap";
 import io from "socket.io-client";
+import { FiLogOut } from "react-icons/fi";
 
 //Import the initial settings from init.js
 import settings from "../init.js";
@@ -66,9 +67,21 @@ class Reply extends React.Component {
     });
     this.setState({ inputText: "" }, this.forceUpdate);
   }
+
+  logOut() {
+    this.socket.emit("statusUpdate", {
+      toSender: false,
+      status: "end",
+      room: room,
+    });
+    this.props.logOut.bind(this.props.this)();
+  }
   render() {
     return (
       <div className="container">
+        <div className="logOutBtn" onClick={this.logOut.bind(this)}>
+          <FiLogOut />
+        </div>
         <div className="activeStatusMessage">
           <div
             className={

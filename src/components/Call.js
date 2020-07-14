@@ -3,6 +3,7 @@ import "../css/bootstrap.min.css";
 import "../css/call.css";
 
 import { Button, Form } from "react-bootstrap";
+import { FiLogOut } from "react-icons/fi";
 
 import io from "socket.io-client";
 
@@ -58,6 +59,13 @@ class Call extends React.Component {
   render() {
     return (
       <div className="container">
+        <div
+          className="logOutBtn"
+          onClick={this.props.logOut.bind(this.props.this)}
+        >
+          <FiLogOut />
+        </div>
+
         <div className="activeStatus">
           <div
             className={

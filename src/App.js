@@ -43,6 +43,7 @@ class App extends React.Component {
               call={this.call}
               token={this.state.token}
               onInvaildToken={this.logOut}
+              logOut={this.logOut}
             />
           );
         }
@@ -52,6 +53,7 @@ class App extends React.Component {
             this={this}
             token={this.state.token}
             onInvaildToken={this.logOut}
+            logOut={this.logOut}
           />
         );
       }
@@ -69,12 +71,15 @@ class App extends React.Component {
   }
 
   logOut() {
-    this.setState({
-      isLogged: false,
-      token: "",
-      calling: false,
-      writingMessage: false,
-    });
+    this.setState(
+      {
+        isLogged: false,
+        token: "",
+        calling: false,
+        writingMessage: false,
+      },
+      this.forceUpdate
+    );
   }
 }
 

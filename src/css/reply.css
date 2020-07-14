@@ -41,6 +41,21 @@ body {
   flex-direction: row;
   justify-content: center;
 }
+.logOutBtn {
+  position: absolute;
+  right: 0.5vw;
+  top: 0px;
+  color: #0261c7;
+  transition: 0.2s color;
+}
+.logOutBtn:hover {
+  cursor: pointer;
+  color: #004c9e;
+}
+.logOutBtn:active {
+  cursor: pointer;
+  color: #003a79;
+}
 
 @media only screen and (max-width: 768px) {
   .messageAlert {
@@ -93,6 +108,9 @@ body {
   }
 }
 @media (min-width: 1200px) {
+  .logOutBtn {
+    font-size: 3vw;
+  }
   .messageAlert {
     width: 100%;
   }
