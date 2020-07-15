@@ -16,6 +16,7 @@ class Calling extends React.Component {
     super(props);
     this.state = {
       status: "Łączenie...",
+      isEnded: false,
     };
   }
 
@@ -60,7 +61,7 @@ class Calling extends React.Component {
           this.setState({ status: "Przeczytano!" });
           break;
         case "end":
-          this.setState({ status: "Zakończono!" });
+          this.setState({ status: "Zakończono!", isEnded: true });
           break;
         case "writingMessage":
           this.props.onMessage.bind(this.props.this)();
@@ -77,7 +78,12 @@ class Calling extends React.Component {
           <Alert.Heading>
             <b className="alertTitle">Status</b>
           </Alert.Heading>
-          <span className="alertBody">{this.state.status}</span>
+          <span
+            className="alertBody"
+            style={this.state.isEnded ? { color: "#f54251" } : {}}
+          >
+            {this.state.status}
+          </span>
         </Alert>
         <Spinner
           className="spinner"
